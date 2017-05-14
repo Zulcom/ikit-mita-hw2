@@ -11,7 +11,7 @@ namespace Domain
         /// </summary>
         /// <param name="model"> Имя водителя </param>
         /// <param name="category"> категория транспортного средства (BCDEF – только одна)</param>
-        private Car(string model, char category)
+        public Car(string model, char category)
         {
             Model = model;
             if (category - 66 <= 70 - 66) // ASCII `B` Code = 66, F Code = 70; a<=x<=b == x-a <= b-a 
@@ -40,15 +40,18 @@ namespace Domain
         /// <param name="carNumber">Новый номер машины</param>
         public string ChangeOwner(Driver owner, string carNumber)
         {
-            CarNumber = carNumber;
-            CarPassport.Owner = owner;
+           
             try
             {
+                CarPassport.Owner=owner;
                 CarPassport.Owner.OwnCar(this);
+                CarNumber=carNumber;
+               
                 return "Новый водитель установлен";
             }
             catch (ArgumentException e)
             {
+                CarPassport.Owner=null;
                 return e.Message;
             }
         }

@@ -25,7 +25,7 @@ namespace Domain
         /// <summary>
         ///  Категории автомобиля - может быть несоколько
         /// </summary>
-        public char[] Category { get; set; }
+        public string Category { get; set; }
 
         public Car Car { get; private set; }
 
@@ -36,14 +36,10 @@ namespace Domain
         /// <param name="car"> закрепляемая машина</param>
         public void OwnCar(Car car)
         {
-            bool isCategoryFound = false;
-            foreach (char i in this.Category)
-                if (i == car.Category)
-                {
-                    this.Car = car;
-                    isCategoryFound = true;
+            if (Category.Contains(car.Category.ToString())) { 
+                    this.Car = car;           
                 }
-            if (!isCategoryFound) throw new ArgumentException($"Водитель не имеет категории {car.Category}", "car");
+            else throw new ArgumentException($"Водитель не имеет категории {car.Category}", "car");
         }
     }
 }
