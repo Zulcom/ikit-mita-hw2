@@ -22,7 +22,15 @@ namespace Domain
         /// <summary>
         ///  Водительский стаж
         /// </summary>
-        public int Experience => DateTime.Today.Year - LicenceDate.Year;
+        public int Experience
+        {
+            get
+            {
+                TimeSpan timeSpan = DateTime.Now-LicenceDate;
+                var years = timeSpan.Days/365;
+                return years;
+            }
+        }
 
         /// <summary>
         ///  Категории автомобиля - может быть несоколько
