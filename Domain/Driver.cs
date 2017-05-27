@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 
 namespace Domain
 {
     public class Driver
     {
+        private string _category;
         public Driver(DateTime licenceDate, string name)
         {
             LicenceDate = licenceDate;
@@ -25,7 +27,18 @@ namespace Domain
         /// <summary>
         ///  Категории автомобиля - может быть несоколько
         /// </summary>
-        public string Category { get; set; }
+        public string Category {
+            get { return _category; }
+            set
+            {
+                if (value.Any(c => !(c - 66 <= 70 - 66)))              
+                    throw new ArgumentOutOfRangeException(nameof(value),
+                        "Вы попытались создать водителя с недекларированной категорией");
+                 // else ...
+                _category = value;
+            }
+
+        }
 
         public Car Car { get; private set; }
 
