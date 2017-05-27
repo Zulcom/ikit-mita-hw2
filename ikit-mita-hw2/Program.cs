@@ -39,7 +39,7 @@ namespace ikit_mita_hw2
             voldemar.Category += "D";
             Console.WriteLine(lada.ChangeOwner(voldemar, "o777oo"));
             Console.Write("FR006: Номер машины Вольдемара...");
-            Console.WriteLine(lada.CarNumber);
+            Console.WriteLine(voldemar.Car.CarNumber);
             Console.Write("FR007: Имя владельца Лады...");
             try
             {
