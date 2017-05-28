@@ -26,9 +26,13 @@ namespace Domain
         {
             get
             {
-                TimeSpan timeSpan = DateTime.Now-LicenceDate;
-                var years = timeSpan.Days/365;
-                return years;
+                int date = DateTime.Now.Year-LicenceDate.Year;
+                if (LicenceDate.Month>DateTime.Now.Month) {
+                    if (DateTime.Now.Month!=2&&DateTime.Now.Day!=29&&LicenceDate.Day!=1&&LicenceDate.Month!=3)
+                        date--;
+                }
+                else if (LicenceDate.Month==DateTime.Now.Month&&LicenceDate.Day>DateTime.Now.Day) date--;
+                return date;
             }
         }
 
